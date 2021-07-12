@@ -10,6 +10,7 @@
   --button-color: #f5f4fa;
   --background-icon-color: #f5f4fa;
   --icon-color: #afb1b8;
+  --cubic-bezier: cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 body {
@@ -62,6 +63,7 @@ img {
 
   color: #000000;
   text-decoration: none;
+
   font-family: Raleway, sans-serif;
   font-size: 26px;
   line-height: 1.2;
@@ -82,6 +84,9 @@ img {
 }
 
 .site-nav .link {
+  position: relative;
+  padding-top: 32px;
+  padding-bottom: 32px;
   color: var(--title-text-color);
   font-weight: 500;
   font-size: 14px;
@@ -93,10 +98,20 @@ img {
   color: var(--accent-color);
 }
 
-.site-nav .link.curent {
+.site-nav .link.underline-link {
   color: var(--accent-color);
 }
-
+.link.underline-link::after {
+  content: "";
+  position: absolute;
+  display: block;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 4px;
+  border-radius: 2px;
+  background-color: var(--accent-color);
+}
 .contact .link {
   display: flex;
   align-items: center;
@@ -193,11 +208,12 @@ img {
   left: 0;
   width: 100%;
   height: 100%;
+  transition: opacity 250ms var(--cubic-bezier);
   background-color: rgba(0, 0, 0, 0.2);
-  z-index: 1;
 }
-.backdrop .is-hidden {
+.backdrop.is-hidden {
   opacity: 0;
+  visibility: hidden;
   pointer-events: none;
 }
 .modal {
@@ -213,8 +229,8 @@ img {
   min-width: 528px;
   min-height: 581px;
   background-color: var(--primary-white-color);
-  z-index: 1;
 }
+
 .modla-close-button {
   width: 30px;
   height: 30px;
@@ -283,19 +299,24 @@ img {
 .img-item:not(:last-child) {
   margin-right: 30px;
 }
-
-.overlap-activity {
-  position: relative;
-}
-.overlap-activity::before {
-  content: "";
-  display: inline-block;
+.overlap-heading {
   position: absolute;
-  width: 370px;
-  height: 70px;
   bottom: 0;
   left: 0;
+  width: 100%;
+  height: 70px;
+  padding: 27px 82px;
+
+  font-size: 14px;
+  line-height: 1.14;
+  font-weight: 700;
+  text-align: center;
+  text-transform: uppercase;
   background-color: rgba(47, 48, 58, 0.8);
+  color: var(--primary-white-color);
+}
+.overlap-activity {
+  position: relative;
 }
 
 /****************** ЗАГОЛОВКИ СЕКЦИЙ *****************/
@@ -457,6 +478,37 @@ img {
 .potfolio-list-item:focus {
   box-shadow: 0px 1px 1px rgba(0, 0, 0, 0.12), 0px 4px 4px rgba(0, 0, 0, 0.06),
     1px 4px 6px rgba(0, 0, 0, 0.16);
+}
+
+/* Overlap */
+.portfolio-link-item {
+  display: block;
+}
+.img-list-portfolio-wrapper {
+  position: relative;
+  overflow: hidden;
+}
+.overlap {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  font-weight: 400;
+  font-size: 18px;
+  line-height: 1.56;
+  letter-spacing: 0.03em;
+  padding: 63px 24px;
+  color: var(--primary-white-color);
+  background-color: rgba(33, 150, 243, 0.9);
+
+  transform: translateY(100%);
+  transition: transform 250ms linear;
+}
+
+.portfolio-link-item:hover .overlap,
+.portfolio-link-item:focus .overlap {
+  transform: translateY(0%);
 }
 
 /************* ПОСТОЯННЫЕ КЛИЕНТЫ **************/
